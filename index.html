@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Map</title>
+    <meta charset="utf-8">
+
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+
+    <!-- jQuery UI  -->
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+        rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <link rel="shortcut icon" href="#" />
+</head>
+
+
+<body onload="myLoader()">
+    <div id="loader" class="loader famous-loader-overlay">
+        <div class="title">
+            <h1>Visual Analytics Final Project</h1>
+            <p> Under the supervision of <b>Prof. Giuseppe Santucci</b> </p>
+        </div>
+        <div class="logo">
+            <div class="white"></div>
+            <div class="orange"></div>
+            <div class="red"></div>
+        </div>
+        <nav class="byNav">
+            <ul class="sub-title">
+                <li><a href="https://twitter.com/Ahmedjalal002" title="Ahmed Osman"> <b>Ahmed Osman</b></a></li>
+                <li><a href="#" title="and"><b>&</b></a></li>
+                <li><a href="https://twitter.com/Marawan_Abo" title="Marawan Abouelhassen"><b>Marawan Abouelhassen</b>
+                    </a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="myWrapper" class="myWrapper">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div id="selections">
+                        <form role="form" class="row" class="form">
+
+                            <!-- <div class="col-md-1"></div> -->
+
+                            <div class="col-md-2">
+                                <div class="box">
+                                    <span class="box-label-left">1</span>
+                                    <div id="slider-div">
+                                        <label class="slider-label"> <b>Top Ranking:</b>
+                                            <span id="dateLabel1">1</span> -
+                                            <span id="dateLabel2">400</span>
+                                        </label>
+                                        <div id="date-slider"></div>
+                                    </div>
+                                    <span class="box-label-right">400</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-2">
+                                <div class="box">
+                                    <span class="box-label-left2">$200</span>
+                                    <div id="slider2-div">
+                                        <label class="slider-label"> <b> Living Cost:</b>
+                                            <span id="costLabel1">$200</span> -
+                                            <span id="costLabel2">$1300</span>
+                                        </label>
+                                        <div id="date2-slider"></div>
+                                    </div>
+                                    <span class="box-label-right2">$1300</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-4">
+                                <label class="slider-label" style="margin-bottom: 0;"><b>Continents: </b> </label>
+                                <div id="continent-slider">
+                                    <div class="continent-slider">
+                                        <div class="row">
+
+                                            <div class="row" style=" align-items: baseline;">
+
+                                                <input class="continentValue" type="checkbox" name="europe"
+                                                    value="Europe" checked="true">
+                                                <label for="europe" class="continent-label">Europe</label>
+
+                                                <input class="continentValue" type="checkbox" name="asia" value="Asia"
+                                                    checked="true">
+                                                <label for="asia" class="continent-label">Asia</label>
+
+                                                <input class="continentValue" type="checkbox" name="africa"
+                                                    value="Africa" checked="true">
+                                                <label for="africa" class="continent-label">Africa</label>
+
+                                                <input class="continentValue" type="checkbox" name="north_america"
+                                                    value="North America" checked="true">
+                                                <label for="north_america" class="continent-label"> N.America</label>
+
+                                                <input class="continentValue" type="checkbox" name="south_america"
+                                                    value="South America" checked="true">
+                                                <label for="south_america" class="continent-label"> S.America </label>
+
+                                                <input class="continentValue" type="checkbox" name="oceania"
+                                                    value="Oceania" checked="true">
+                                                <label for="oceania" class="continent-label"> Oceania </label>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div id="errors"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align: center; align-self: center;">
+                                <label style="font-size: 0.8em;"><b>Year:</b>
+                                    <select id="var-select" class="form-control">
+                                        <option selected value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+
+                                    </select>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+
+
+
+    <!-- START .section -->
+    <section class="section-wrap">
+        <div class="wrapper">
+            <div class="one">
+                <div class="map-holder"></div>
+            </div>
+            <div class="two" id="scatterArea">
+                <!-- <div  class="scatter"></div> -->
+            </div>
+            <div class="three" id="chart">
+            </div>
+            <div class="four" id="table">
+                <table class="fixed_header html_table" style="width: 100%;">
+                    <thead class="thead">
+                        <tr>
+                            <th class="td">WR</th>
+                            <th class="td">Name</th>
+                            <th class="td">CN</th>
+                            <th class="td">T</th>
+                            <th class="td">I</th>
+                            <th class="td">R</th>
+                            <th class="td">C</th>
+                            <th class="td">N</th>
+                            <th class="td">SSR</th>
+                            <th class="td">Continent</th>
+                            <th class="td">C$</th>
+                        </tr>
+                    </thead>
+
+                </table>
+
+                <ul class="legend-table"></ul>
+
+                <!-- <ul class="legend-table">
+                    <li>
+                        WR: World rank
+                    </li>
+                    <li>
+                        T: Teaching
+                    </li>
+                    <li>
+                        I: International
+                    </li>
+                    <li>
+                            R: Reasearch
+                        </li>
+                </ul> -->
+                <!-- <ul class="legend-table">
+                    <li>
+                        C: Citations
+                    </li>
+                    <li>
+                        N: Number of students
+                    </li>
+                    <li>
+                        SSR: Student staff ratio
+                    </li>
+                    <li>
+                        C$: Cost Of Living
+                    </li>
+                </ul> -->
+            </div>
+
+
+            <div class="five radarChart">
+                <!-- <div class="radar"></div> -->
+            </div>
+        </div>
+    </section>
+    <!-- END .section -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/main.js"> </script>
+    <script src="js/radarChart.js"></script>
+    <script src="js/lineChart.js"></script>
+
+    <script>
+        var myVar;
+
+        function myLoader() {
+            myVar = setTimeout(showPage, 100);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myWrapper").style.opacity = 1;
+        }
+    </script>
+</body>
+
+</html>
